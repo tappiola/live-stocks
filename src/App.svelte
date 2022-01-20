@@ -1,22 +1,22 @@
 <script>
-	import Chart from './Chart.svelte';
+	import Stock from './Stock.svelte';
+    import StockSelect from "./StockSelect.svelte";
+    import {tickers} from "./stores";
+    import {flip} from 'svelte/animate';
 
 	export let name;
 </script>
 
-<Chart/>
+<StockSelect/>
+<div class="grid">
+        {#each $tickers as ticker (ticker)}
+        <Stock {ticker}/>
+        {/each}
+</div>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+ .grid {
+     display: grid;
+     grid-template-columns: repeat(2, 1fr);
+ }
 </style>
