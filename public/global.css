@@ -6,6 +6,9 @@
 	--secondary-lightest: #272727;
 	--secondary-data: #2d2d2d;
 	--primary-closer: #5a5a5a;
+
+	--growth: #639435;
+	--decline: #ff6384;
 }
 
 html, body {

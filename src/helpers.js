@@ -7,3 +7,5 @@ export const debounce = (callback, delay) => {
         timeout = setTimeout(() => callback.apply(context, args), delay);
     };
 };
+
+export const getCssVariable = name => getComputedStyle(document.body).getPropertyValue(name);

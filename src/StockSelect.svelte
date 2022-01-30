@@ -3,10 +3,7 @@
     import {activeKey, keyIndex, tickers} from "./stores";
     import CloseIcon from './CloseIcon.svelte';
     import {debounce} from "./helpers";
-
-    const NAME = '2. name';
-    const SYMBOL = '1. symbol';
-    const MIN_TICKER_LENGTH = 2;
+    import {MIN_TICKER_LENGTH, SEARCH_DEBOUNCE, SYMBOL, NAME} from "./constants";
 
     let value='';
     let selectOptions = [];
@@ -15,11 +12,11 @@
         fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${ticker}&apikey=${$activeKey}`)
             .then(response => response.json())
             .then(data => {
-                selectOptions = data.bestMatches;
+                selectOptions = data.bestMatches.filter(stock => !stock[SYMBOL].includes('.'));
             }).catch(error => {
             console.log(error);
         });
-    }, 500);
+    }, SEARCH_DEBOUNCE);
 
     $: if (value.length >= MIN_TICKER_LENGTH){
         searchStocks(value);
@@ -29,6 +26,7 @@
 
     const addChart = (option) => {
         $tickers = [option[SYMBOL], ...$tickers];
+        clearSearch();
     }
 
     const clearSearch = () => {
@@ -40,7 +38,7 @@
 <div class="select-wrapper" use:clickOutside on:click_outside={clearSearch}>
 <input class="stock-input" bind:value={value} placeholder="Add stock" />
     {#if value}
-        <CloseIcon onCloseClick={clearSearch}/>
+        <CloseIcon onCloseClick={clearSearch} isInput="true"/>
     {/if}
 
     {#if selectOptions.length}
@@ -59,6 +57,7 @@
 
 <style>
     .select-wrapper {
+        padding-top: 10px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -85,8 +84,8 @@
 
     .select-options {
         position: absolute;
-        top: 50px;
-        background-color: darkslategray;
+        top: 52px;
+        background-color: #3d3d3d;
         padding: 20px;
         border-radius: 20px;
         width: 600px;

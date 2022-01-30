@@ -1,9 +1,13 @@
 <script>
     export let onCloseClick;
+    export let isChart = false;
+    export let isInput = false;
 </script>
 
 <svg
         class="close-icon"
+        class:isChart={isChart}
+        class:isInput={isInput}
         width="24"
         height="24"
         viewBox="0 0 24 24"
@@ -17,9 +21,22 @@
 <style>
     .close-icon {
         fill: gray;
+        cursor: pointer;
+    }
+
+    .isInput {
         position: absolute;
         right: 10px;
-        cursor: pointer;
+    }
+
+    .isChart {
+        width: 40px;
+        height: 40px;
+        fill: var(--secondary-lightest);
+    }
+
+    .isChart:hover {
+        color: pink;
     }
 
     .close-icon:hover {

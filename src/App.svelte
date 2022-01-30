@@ -2,7 +2,6 @@
 	import Stock from './Stock.svelte';
     import StockSelect from "./StockSelect.svelte";
     import {tickers} from "./stores";
-    import {flip} from 'svelte/animate';
 
 	export let name;
 </script>
