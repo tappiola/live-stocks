@@ -1,5 +1,5 @@
 This app is used to track price of the shares of your choice for the last trading day.
-Live demo: https://stocks.tappiola.com
+Live demo: https://stocks.tappiola.co.uk/
 
 ## Features
 
